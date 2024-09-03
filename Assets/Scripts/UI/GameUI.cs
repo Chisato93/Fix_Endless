@@ -3,29 +3,25 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameHUDManager : MonoBehaviour
+public class GameUI : MonoBehaviour
 {
-    public static GameHUDManager instance;
-    private void Awake()
-    {
-        instance = this;
-    }
     public TMP_Text score_text;
+    public Image breathe_bar;
+    public GameObject result_panel;
+    public TMP_Text result_Score_text;
+    public TMP_Text best_Score_text;
+    public TMP_Text gold_text;
 
     public void SetDistText(int dist)
     {
         score_text.text = dist.ToString("#,##0");
     }
 
-    public Image breathe_bar;
-    public void Breathe_Bar_Gage(float gage)
+    public void Breathe_Bar_Gage()
     {
-        breathe_bar.fillAmount = gage;
+        Debug.Log("get tank");
+        breathe_bar.fillAmount = GameManager.instance.GetBreathGage();
     }
-
-    public GameObject result_panel;
-    public TMP_Text result_Score_text;
-    public TMP_Text best_Score_text;
     
     public void GameOver_UI(int dist, int best)
     {
@@ -34,7 +30,6 @@ public class GameHUDManager : MonoBehaviour
         result_panel.SetActive(true);
     }
 
-    public TMP_Text gold_text;
 
     public void SetGoldText()
     {

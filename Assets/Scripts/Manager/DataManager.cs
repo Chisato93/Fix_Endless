@@ -81,7 +81,6 @@ public class DataManager : MonoBehaviour
                 GameManager.instance.best_goal = playerData.best_dist;
                 GameManager.instance.Gold = playerData.gold;
 
-                MainHUDManager.instacne.SetGold();
             }
 
         }

@@ -1,6 +1,7 @@
 using Cinemachine;
 using System;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -45,8 +46,8 @@ public class GameManager : MonoBehaviour
     public GameObject go_Main;
     public void EndCinma()
     {
-        go_Cinema.SetActive(false);
-        go_Main.SetActive(true);
+        //go_Cinema.SetActive(false);
+        // go_Main.SetActive(true);
 
     }
     public void InitGame()
@@ -74,6 +75,15 @@ public class GameManager : MonoBehaviour
         go_Cinema.SetActive(true);
     }
 
+    public void GetGold(int gold)
+    {
+        Gold += gold;
+    }
+    public void GetOxgyn(int oxgyn)
+    {
+        current_Breathe += oxgyn;
+    }
+
     void TImePerSecond()
     {
         if (isLive)
@@ -93,8 +103,8 @@ public class GameManager : MonoBehaviour
 
 
             BreatheGage();
-            if (GameHUDManager.instance is null) return;
-            GameHUDManager.instance.SetDistText(goal);
+            //if (GameUI.instance is null) return;
+            //GameUI.instance.SetDistText(goal);
 
             time_count++;
             if (time_count >= 10)
@@ -130,10 +140,11 @@ public class GameManager : MonoBehaviour
     public void BreatheGage()
     {
         float gage = (float)current_Breathe / maxBreathe;
-        if (GameHUDManager.instance is null) return;
-        GameHUDManager.instance.Breathe_Bar_Gage(gage);
     }
-
+    public float GetBreathGage()
+    {
+        return (float)current_Breathe / maxBreathe;
+    }
     void GameOver()
     {
         DataManager.instance.SaveData();
@@ -142,7 +153,7 @@ public class GameManager : MonoBehaviour
 
         if (best_goal >= goal) best_goal = goal;
 
-        GameHUDManager.instance.GameOver_UI(goal, best_goal);
+        // GameUI.instance.GameOver_UI(goal, best_goal);
     }
     void GameClear()
     {
