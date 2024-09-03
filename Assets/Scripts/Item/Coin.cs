@@ -1,44 +1,25 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Coin : InteractableObject
 {
-    public float rotationSpeed = 100f;
-    AudioSource audio;
-    public GameObject coin;
+    private readonly int _distance;
+    private AudioManager _audioManager;
+    private GameUI _gameUI;
 
-    private void Start()
+    public void Init(AudioManager audioManager, GameUI gameUI)
     {
-        audio = GetComponent<AudioSource>();
-        StartCoroutine(RotateCoin());
-    }
-    private IEnumerator RotateCoin()
-    {
-        while (true)
-        {
-            transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
-            yield return null; // ÇÑ ÇÁ·¹ÀÓÀ» ±â´Ù¸³´Ï´Ù.
-        }
+        _audioManager = audioManager;
+        _gameUI = gameUI;
+
+        OnInteract += () => _audioManager.PlayEffectSound(ItemType.COIN);
+        OnInteract += _gameUI.SetGoldText;
+        OnInteract += () => GameManager.instance.GetGold(GetRandomCoin());
     }
 
-    private void OnTriggerEnter(Collider other)
+    int GetRandomCoin()
     {
-        if (other.CompareTag(Tags.PLAYER))
-        {
-            StartCoroutine(GetCoin() );
-        }
-    }
-
-    const int minCoin = 3;
-    const int maxCoin = 6;
-    IEnumerator GetCoin()
-    {
-        audio.Play();
-        int randCoin = Random.Range(minCoin, maxCoin);
-        GameManager.instance.Gold += randCoin;
-        GameHUDManager.instance.SetGoldText();
-        coin.SetActive(false);
-        yield return new WaitForSeconds(Resources.Load<AudioClip>("Sounds/Coin").length);
-        Destroy(gameObject);
+        // ê±°ë¦¬/100 +1, ê±°ë¦¬ /100 * 2 +1;
+        return Random.Range(1, 2);
     }
 }

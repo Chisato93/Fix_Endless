@@ -1,12 +1,13 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Rock : MonoBehaviour
+public class Rock : InteractableObject
 {
-    private void OnCollisionEnter(Collision collision)
+    private PlayerRunning _player;
+
+    public void Init(PlayerRunning player)
     {
-        if(collision.gameObject.CompareTag(Tags.PLAYER))
-        {
-            GameManager.instance.Dead();
-        }
+        _player = player;
+
+        OnInteract += player.Death;
     }
 }

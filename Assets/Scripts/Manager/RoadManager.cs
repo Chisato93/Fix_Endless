@@ -17,7 +17,7 @@ public class RoadManager : MonoBehaviour
     {
         Floor.OnFloorDestroyed += RemoveDestroyedFloor;
 
-        // 현재 바닥에서 다음 바닥의 생성 위치를 가져온다. 
+        // 현픸E바닥에서 다음 바닥의 생성 위치를 가져온다. 
         SetRandomFloor();
         if (floor_list.Count == 0) return;
         for(int i = 0; i < 9; i++)

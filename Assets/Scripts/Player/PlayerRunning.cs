@@ -1,3 +1,4 @@
+ï»¿using System;
 using UnityEngine;
 
 public class PlayerRunning : MonoBehaviour
@@ -53,19 +54,25 @@ public class PlayerRunning : MonoBehaviour
 
         if (horizontalInput != 0f)
         {
-            // Ä³¸¯ÅÍ¸¦ 90µµ È¸Àü½ÃÅ´
             Vector3 eulerAngle = transform.eulerAngles;
             eulerAngle.y += horizontalInput > 0f ? 90f : -90f;
             transform.eulerAngles = eulerAngle;
 
-            // È¸Àü ÈÄ¿¡´Â ´Ù½Ã È¸ÀüÀ» Çã¿ëÇÏÁö ¾ÊÀ½
             canTurn = false;
         }
         else
         {
-            // Ä³¸¯ÅÍ°¡ ¾ÕÀ¸·Î °è¼Ó ³ª¾Æ°¡µµ·Ï ¼³Á¤
             Vector3 forwardDirection = transform.forward;
             rb.MovePosition(transform.position + forwardDirection * MoveSpeed * Time.deltaTime);
         }
+    }
+
+    // ì„ì‹œ
+    public void Death()
+    {
+        // ì£½ëŠ” ì†Œë¦¬
+        // ê²Œì„ì˜¤ë²„ íŒë„¬
+        // ê²Œì„ ì •ì§€
+        Debug.Log("í”Œë ˆì´ì–´ì£½ìŒ");
     }
 }

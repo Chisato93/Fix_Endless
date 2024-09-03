@@ -1,33 +1,21 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
-public class OxygenTank : MonoBehaviour
+public class OxygenTank : InteractableObject
 {
-    AudioSource audio;
-    GameObject go;
-
     const int oxygen_amount =30;
 
-    private void Awake()
+    private AudioManager _audioManager;
+    private GameUI _gameUI;
+
+    public void Init(AudioManager audioManager, GameUI gameUI)
     {
-        go = transform.GetChild(0).gameObject;
-        audio = GetComponent<AudioSource>();
+        _audioManager = audioManager;
+        _gameUI = gameUI;
+
+        OnInteract += () => _audioManager.PlayEffectSound(ItemType.OXYGEN);
+        OnInteract += _gameUI.Breathe_Bar_Gage;
+        OnInteract += () => GameManager.instance.GetOxgyn(oxygen_amount);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag(Tags.PLAYER))
-        {
-            StartCoroutine(GetOxygen());
-        }
-    }
-
-    IEnumerator GetOxygen()
-    {
-        audio.Play();
-        go.SetActive(false);
-        GameManager.instance.GetBreathe(oxygen_amount);
-        yield return new WaitForSeconds(Resources.Load<AudioClip>("Sounds/Breathe").length);
-        Destroy(gameObject);
-    }
 }
