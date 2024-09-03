@@ -4,10 +4,10 @@ using UnityEngine;
 public class Coin : InteractableObject
 {
     private readonly int _distance;
-    private AudioManager _audioManager;
+    private SoundEffect _audioManager;
     private GameUI _gameUI;
 
-    public void Init(AudioManager audioManager, GameUI gameUI)
+    public void Init(SoundEffect audioManager, GameUI gameUI)
     {
         _audioManager = audioManager;
         _gameUI = gameUI;
