@@ -238,4 +238,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 2
-  moveSpeed: 1
+  moveSpeed: 0.1
