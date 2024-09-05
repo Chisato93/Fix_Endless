@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    Animator anim;
+    private Animator anim;
+    private PlayerInteract playerInteract;
 
-    private void Awake()
+    private void Start()
     {
         anim = GetComponent<Animator>();
+        playerInteract = GetComponent<PlayerInteract>();
+        playerInteract.OnPlayerDeath += Death;
     }
 
     public void Death()

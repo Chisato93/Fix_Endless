@@ -1,15 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem particle;
-    [SerializeField] private GameOverPanel gameOverPanel;
-    private PlayerAnimation playerAnim;
-
-    private void Start()
-    {
-        playerAnim = GetComponent<PlayerAnimation>();
-    }
+    public event Action OnPlayerDeath;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -32,9 +26,6 @@ public class PlayerInteract : MonoBehaviour
 
     public void Dead()
     {
-        SoundController.Instance.PlaySEAudio(SEType.Dead);
-        particle.Play();
-        playerAnim.Death();
-        gameOverPanel.ActiveOn();
+        OnPlayerDeath?.Invoke();
     }
 }

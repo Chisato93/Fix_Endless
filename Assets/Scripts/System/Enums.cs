@@ -14,8 +14,6 @@ public enum ItemType
 
     TOTAL,
 }
-
-
 public enum SEType
 {
     Coin,
