@@ -5,16 +5,16 @@ public class OxygenTank : InteractableObject
 {
     const int oxygen_amount =30;
 
-    private SoundEffect _audioManager;
-    private GameUI _gameUI;
+    private SoundController _audioManager;
+    private GameUIController _gameUI;
 
-    public void Init(SoundEffect audioManager, GameUI gameUI)
+    public void Init(SoundController audioManager, GameUIController gameUI)
     {
         _audioManager = audioManager;
         _gameUI = gameUI;
 
-        OnInteract += () => _audioManager.PlayEffectSound(ItemType.OXYGEN);
-        OnInteract += _gameUI.Breathe_Bar_Gage;
+        OnInteract += () => _audioManager.PlaySEAudio(SEType.Oxygen);
+        OnInteract += _gameUI.SetOxygen;
         OnInteract += () => GameManager.instance.GetOxgyn(oxygen_amount);
     }
 
