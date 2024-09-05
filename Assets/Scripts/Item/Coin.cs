@@ -4,15 +4,15 @@ using UnityEngine;
 public class Coin : InteractableObject
 {
     private readonly int _distance;
-    private SoundEffect _audioManager;
-    private GameUI _gameUI;
+    private SoundController _audioManager;
+    private GameUIController _gameUI;
 
-    public void Init(SoundEffect audioManager, GameUI gameUI)
+    public void Init(SoundController audioManager, GameUIController gameUI)
     {
         _audioManager = audioManager;
         _gameUI = gameUI;
 
-        OnInteract += () => _audioManager.PlayEffectSound(ItemType.COIN);
+        OnInteract += () => _audioManager.PlaySEAudio(SEType.Coin);
         OnInteract += _gameUI.SetGoldText;
         OnInteract += () => GameManager.instance.GetGold(GetRandomCoin());
     }
