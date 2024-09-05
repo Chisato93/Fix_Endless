@@ -4,16 +4,12 @@ using UnityEngine;
 public class Coin : InteractableObject
 {
     private readonly int _distance;
-    private SoundController _audioManager;
-    private GameUIController _gameUI;
+    [SerializeField] private GameUIController _gameUI;
 
-    public void Init(SoundController audioManager, GameUIController gameUI)
+    private void Start()
     {
-        _audioManager = audioManager;
-        _gameUI = gameUI;
-
-        OnInteract += () => _audioManager.PlaySEAudio(SEType.Coin);
         OnInteract += _gameUI.SetGoldText;
+        OnInteract += () => SoundController.Instance.PlaySEAudio(SEType.Coin);
         OnInteract += () => GameManager.instance.GetGold(GetRandomCoin());
     }
 
@@ -21,5 +17,11 @@ public class Coin : InteractableObject
     {
         // 거리/100 +1, 거리 /100 * 2 +1;
         return Random.Range(1, 2);
+    }
+
+    protected override void InteractItem()
+    {
+        base.InteractItem();
+        Destroy(this.gameObject);
     }
 }

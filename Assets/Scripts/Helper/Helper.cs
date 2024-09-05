@@ -15,3 +15,13 @@ public class SceneName
     public const string GAME_SCENE = "GameScene";
 }
 
+public class AnimatorParams
+{
+    public const string DEATH = "DEATH";
+    public const string STRECHING = "STRECHING";
+    public const string CARRY = "CARRY";
+    public const string HOLD = "HOLD";
+    public const string DIE = "DIE";
+    public const string IDLE = "IDLE";
+    public const string RUN = "RUN";
+}

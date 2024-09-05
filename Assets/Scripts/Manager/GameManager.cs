@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER);
         isLive = false;
-        player.GetComponent<PlayerAnimation>().Dead();
+        player.GetComponent<PlayerBehaviour>().Death();
 
         Invoke("GameOver", delay_Time);
     }

@@ -1,13 +1,25 @@
 using UnityEngine;
 
-public class ChangeTurn : MonoBehaviour
+public class ChangeTurn : InteractableObject
 {
-    private void OnTriggerEnter(Collider other)
+    private PlayerRun _player;
+
+    private void Start()
     {
-        if(other.gameObject.CompareTag(Tags.PLAYER))
+        OnInteract += _player.SetTurn;
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(Tags.PLAYER))
         {
-            other.GetComponent<PlayerRunning>().canTurn = true;
-            GetComponent<Collider>().enabled = false;
+            _player = other.GetComponent<PlayerRun>();
+            InteractItem();
         }
+    }
+
+    protected override void InteractItem()
+    {
+        base.InteractItem();
     }
 }
