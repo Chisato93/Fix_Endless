@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerBehaviour : MonoBehaviour
+public class PlayerAnimation : MonoBehaviour
 {
     Animator anim;
 
@@ -12,12 +12,6 @@ public class PlayerBehaviour : MonoBehaviour
     public void Death()
     {
         anim.SetTrigger(AnimatorParams.DEATH);
-       
-        var particleComponent = GetComponent<Particle>();
-        if (particleComponent != null)
-        {
-            particleComponent.PlayParticle();
-        }
     }
 
     void Streching()

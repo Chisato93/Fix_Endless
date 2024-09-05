@@ -1,22 +1,28 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class OxygenTank : InteractableObject
-{
+public class OxygenTank : DisappearObject
+{ 
     const int oxygen_amount =30;
-    [SerializeField]private GameUIController _gameUI;
+    private GameUIController _gameUI;
 
     private void Start()
+    {
+        _gameUI = FindObjectOfType<GameUIController>();
+    }
+
+    protected override void RegisterEvents()
     {
         OnInteract += _gameUI.SetOxygen;
         OnInteract += () => SoundController.Instance.PlaySEAudio(SEType.Oxygen);
         OnInteract += () => GameManager.instance.GetOxgyn(oxygen_amount);
     }
 
-
-    protected override void InteractItem()
+    protected override void UnregisterEvents()
     {
-        base.InteractItem();
-        Destroy(this.gameObject);
+        OnInteract -= _gameUI.SetOxygen;
+        OnInteract -= () => SoundController.Instance.PlaySEAudio(SEType.Oxygen);
+        OnInteract -= () => GameManager.instance.GetOxgyn(oxygen_amount);
     }
+
 }

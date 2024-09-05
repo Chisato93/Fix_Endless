@@ -6,20 +6,15 @@ public class ChangeTurn : InteractableObject
 
     private void Start()
     {
+        _player = FindObjectOfType<PlayerRun>();
+    }
+    protected override void RegisterEvents()
+    {
         OnInteract += _player.SetTurn;
     }
 
-    protected override void OnTriggerEnter(Collider other)
+    protected override void UnregisterEvents()
     {
-        if (other.CompareTag(Tags.PLAYER))
-        {
-            _player = other.GetComponent<PlayerRun>();
-            InteractItem();
-        }
-    }
-
-    protected override void InteractItem()
-    {
-        base.InteractItem();
+        OnInteract -= _player.SetTurn;
     }
 }

@@ -1,26 +1,22 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Wall : InteractableObject
 {
-    private PlayerBehaviour _player;
-
-    private void Start()
+    protected override void RegisterEvents()
     {
-        OnInteract += _player.Death;
-        OnInteract += () => SoundController.Instance.PlaySEAudio(SEType.Dead);
+        OnInteract += HandlePlayerInteraction;
     }
 
-    protected override void OnTriggerEnter(Collider other)
+    protected override void UnregisterEvents()
     {
-        if (other.CompareTag(Tags.PLAYER))
+        OnInteract -= HandlePlayerInteraction;
+    }
+    private void HandlePlayerInteraction()
+    {
+        PlayerInteract playerInteract = FindObjectOfType<PlayerInteract>();
+        if (playerInteract != null)
         {
-            _player = other.GetComponent<PlayerBehaviour>();
-            InteractItem();
+            playerInteract.Dead();
         }
-    }
-
-    protected override void InteractItem()
-    {
-        base.InteractItem();
     }
 }
