@@ -1,16 +1,28 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Coin : InteractableObject
+public class Coin : DisappearObject
 {
     private readonly int _distance;
-    [SerializeField] private GameUIController _gameUI;
+    private GameUIController _gameUI;
 
     private void Start()
+    {
+        _gameUI = FindObjectOfType<GameUIController>();
+    }
+
+    protected override void RegisterEvents()
     {
         OnInteract += _gameUI.SetGoldText;
         OnInteract += () => SoundController.Instance.PlaySEAudio(SEType.Coin);
         OnInteract += () => GameManager.instance.GetGold(GetRandomCoin());
+    }
+
+    protected override void UnregisterEvents()
+    {
+        OnInteract -= _gameUI.SetGoldText;
+        OnInteract -= () => SoundController.Instance.PlaySEAudio(SEType.Coin);
+        OnInteract -= () => GameManager.instance.GetGold(GetRandomCoin());
     }
 
     int GetRandomCoin()
@@ -19,9 +31,4 @@ public class Coin : InteractableObject
         return Random.Range(1, 2);
     }
 
-    protected override void InteractItem()
-    {
-        base.InteractItem();
-        Destroy(this.gameObject);
-    }
 }
