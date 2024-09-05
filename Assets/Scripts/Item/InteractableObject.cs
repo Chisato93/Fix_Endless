@@ -26,7 +26,7 @@ public class InteractableObject : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag(Tags.PLAYER))
         {
@@ -34,8 +34,7 @@ public class InteractableObject : MonoBehaviour
         }
     }
 
-    protected void InteractItem() {
+    protected virtual void InteractItem() {
         Notify();
-        Destroy(this.gameObject);
     }
 }

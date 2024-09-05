@@ -1,12 +1,26 @@
 using UnityEngine;
 
-public class Wall : MonoBehaviour
+public class Wall : InteractableObject
 {
-    private void OnCollisionEnter(Collision collision)
+    private PlayerBehaviour _player;
+
+    private void Start()
     {
-        if(collision.gameObject.CompareTag(Tags.PLAYER))
+        OnInteract += _player.Death;
+        OnInteract += () => SoundController.Instance.PlaySEAudio(SEType.Dead);
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(Tags.PLAYER))
         {
-            GameManager.instance.Dead();
+            _player = other.GetComponent<PlayerBehaviour>();
+            InteractItem();
         }
+    }
+
+    protected override void InteractItem()
+    {
+        base.InteractItem();
     }
 }

@@ -4,18 +4,19 @@ using UnityEngine;
 public class OxygenTank : InteractableObject
 {
     const int oxygen_amount =30;
+    [SerializeField]private GameUIController _gameUI;
 
-    private SoundController _audioManager;
-    private GameUIController _gameUI;
-
-    public void Init(SoundController audioManager, GameUIController gameUI)
+    private void Start()
     {
-        _audioManager = audioManager;
-        _gameUI = gameUI;
-
-        OnInteract += () => _audioManager.PlaySEAudio(SEType.Oxygen);
         OnInteract += _gameUI.SetOxygen;
+        OnInteract += () => SoundController.Instance.PlaySEAudio(SEType.Oxygen);
         OnInteract += () => GameManager.instance.GetOxgyn(oxygen_amount);
     }
 
+
+    protected override void InteractItem()
+    {
+        base.InteractItem();
+        Destroy(this.gameObject);
+    }
 }

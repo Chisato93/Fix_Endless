@@ -2,12 +2,26 @@
 
 public class Rock : InteractableObject
 {
-    private PlayerRunning _player;
+    private PlayerBehaviour _player;
 
-    public void Init(PlayerRunning player)
+    private void Start()
     {
-        _player = player;
+        OnInteract += _player.Death;
+        OnInteract += () => SoundController.Instance.PlaySEAudio(SEType.Dead);
+    }
 
-        OnInteract += player.Death;
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(Tags.PLAYER))
+        {
+            _player = other.GetComponent<PlayerBehaviour>();
+            InteractItem();
+        }
+    }
+
+    protected override void InteractItem()
+    {
+        base.InteractItem();
+        Destroy(this.gameObject);
     }
 }
