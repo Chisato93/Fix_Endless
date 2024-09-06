@@ -207,7 +207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6687062739256060552, guid: 6abe63e686060db41a5bc48b542a3241, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6687062739256060552, guid: 6abe63e686060db41a5bc48b542a3241, type: 3}
       propertyPath: m_LocalPosition.y
@@ -215,7 +215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6687062739256060552, guid: 6abe63e686060db41a5bc48b542a3241, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6687062739256060552, guid: 6abe63e686060db41a5bc48b542a3241, type: 3}
       propertyPath: m_LocalRotation.w
@@ -244,6 +244,10 @@ PrefabInstance:
     - target: {fileID: 6687062739256060552, guid: 6abe63e686060db41a5bc48b542a3241, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8075259663788919637, guid: 6abe63e686060db41a5bc48b542a3241, type: 3}
+      propertyPath: roadType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

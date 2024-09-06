@@ -9,9 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2214778007244120674}
-  - component: {fileID: 2682506160007695630}
   m_Layer: 0
-  m_Name: GenerateTransform
+  m_Name: Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,19 +31,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6687062739256060552}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2682506160007695630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1583375712572138024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4796d71c34964994591279625fe03bfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item_Spawn_Point: []
 --- !u!1 &1600614176190347028
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1858283515693358355}
   m_Layer: 0
-  m_Name: NextFloorPos
+  m_Name: NextGenerateTransform
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -321,15 +307,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6687062739256060552}
-  - component: {fileID: 136054343686165747}
   - component: {fileID: 4556348616686816219}
+  - component: {fileID: 8075259663788919637}
+  - component: {fileID: 3310922078421052751}
   m_Layer: 0
-  m_Name: Floor
+  m_Name: Road
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6687062739256060552
 Transform:
   m_ObjectHideFlags: 0
@@ -350,24 +337,6 @@ Transform:
   - {fileID: 2214778007244120674}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &136054343686165747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3612446122410640312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cba2195ab661b44493ca74bfc1a4dba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  floor_type: 1
-  next_Floor_Spawn_Point: {fileID: 1858283515693358355}
-  items:
-  - {fileID: 3798550925944523882, guid: 4bb43bb8d8821fe41bcfb3aaa56cf965, type: 3}
-  - {fileID: 2801024173773593402, guid: 606dcc8b10a3dd641920da6794c0802e, type: 3}
-  - {fileID: 4582274659377625375, guid: c64892660cd564a479da6391c9af109d, type: 3}
 --- !u!65 &4556348616686816219
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -389,6 +358,36 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 13, y: 5, z: 0.1}
   m_Center: {x: 0, y: 2.5, z: 6.5}
+--- !u!114 &8075259663788919637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3612446122410640312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94536ef8e8169234ea61617410e9ca10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roadType: 1
+  nextFloorSpawnPoint: {fileID: 1858283515693358355}
+--- !u!114 &3310922078421052751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3612446122410640312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0de45eb22bd899340af41cf87bdfb33f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrefabs:
+  - {fileID: 3798550925944523882, guid: 4bb43bb8d8821fe41bcfb3aaa56cf965, type: 3}
+  - {fileID: 4582274659377625375, guid: c64892660cd564a479da6391c9af109d, type: 3}
+  - {fileID: 2801024173773593402, guid: 606dcc8b10a3dd641920da6794c0802e, type: 3}
 --- !u!1 &6676909498869189415
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,7 +1,7 @@
 public enum FloorType
 {
     NONE,
-    FLOOR,
+    NORMAL,
     HEIGHT,
     CORNER,
     START_FLOOR,
@@ -14,8 +14,6 @@ public enum ItemType
 
     TOTAL,
 }
-
-
 public enum SEType
 {
     Coin,

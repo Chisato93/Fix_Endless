@@ -10,12 +10,17 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private TMP_Text goldText;
     [SerializeField] private TMP_Text distanceText;
     [SerializeField] private Image oxygenImage;
+
+    private PlayerInteract playerInteract;
     private GoldTextController goldTextController;
     private DistanceTextController distanceTextController;
     private OxygenSlideController oxygenSlideController;
 
     private void Start()
     {
+        playerInteract = FindObjectOfType<PlayerInteract>();
+        playerInteract.OnPlayerDeath += ActiveGameOverPanel;
+
         goldTextController = new GoldTextController(goldText);
         distanceTextController = new DistanceTextController(distanceText);
         oxygenSlideController = new OxygenSlideController(oxygenImage);
@@ -38,13 +43,15 @@ public class GameUIController : MonoBehaviour
         oxygenSlideController.SetSlide(임시);
     }
 
-    private void Update()
+    public void ActiveGameOverPanel()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !settingPanel.gameObject.activeSelf)
-        {
-            settingPanel.ActiveOn();
-        }
+        if (!gameOverPanel.gameObject.activeSelf)
+            gameOverPanel.ActiveOn();
     }
 
-    
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && !settingPanel.gameObject.activeSelf)
+            settingPanel.ActiveOn();
+    }
 }
