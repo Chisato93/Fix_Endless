@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4660428352137431266
+--- !u!1001 &3281322989190712236
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,11 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3612446122410640312, guid: 6abe63e686060db41a5bc48b542a3241, type: 3}
       propertyPath: m_Name
-      value: FloorStarter Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 4556348616686816219, guid: 6abe63e686060db41a5bc48b542a3241, type: 3}
-      propertyPath: m_Enabled
-      value: 1
+      value: Floor Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6687062739256060552, guid: 6abe63e686060db41a5bc48b542a3241, type: 3}
       propertyPath: m_LocalPosition.x
@@ -34,15 +30,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6687062739256060552, guid: 6abe63e686060db41a5bc48b542a3241, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6687062739256060552, guid: 6abe63e686060db41a5bc48b542a3241, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6687062739256060552, guid: 6abe63e686060db41a5bc48b542a3241, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6687062739256060552, guid: 6abe63e686060db41a5bc48b542a3241, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -55,10 +51,6 @@ PrefabInstance:
     - target: {fileID: 6687062739256060552, guid: 6abe63e686060db41a5bc48b542a3241, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8075259663788919637, guid: 6abe63e686060db41a5bc48b542a3241, type: 3}
-      propertyPath: roadType
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

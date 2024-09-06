@@ -33,42 +33,4 @@ public class Road : MonoBehaviour, IInteractable
         Destroy(gameObject);
     }
 
-    //public GameObject[] items;
-    //const int COIN = 0, ROCK = 1, OXYGEN = 2;
-    //const int max_Coin_Count = 4;
-
-    //void SetItem()
-    //{
-    //    if (roadType != FloorType.CORNER && roadType != FloorType.START_FLOOR)
-    //    {
-    //        ItemType rnd = (ItemType)Random.Range(0, (int)ItemType.TOTAL);
-
-    //        ItemSpawnPoint item_spawn = GetComponentInChildren<ItemSpawnPoint>();
-
-    //        if (rnd == ItemType.COIN)
-    //        {
-    //            int rndcnt = Random.Range(3, max_Coin_Count);
-
-    //            for (int i = 0; i < rndcnt; i++)
-    //            {
-    //                int rnd_spawn = Random.Range(0, item_spawn.item_Spawn_Point.Count);
-    //                Vector3 spawnPosition = item_spawn.item_Spawn_Point[rnd_spawn] + transform.position;
-    //                Instantiate(items[COIN], spawnPosition, Quaternion.identity, this.transform);
-    //                item_spawn.item_Spawn_Point.RemoveAt(rnd_spawn);
-    //            }
-    //        }
-    //        else if (rnd == ItemType.ROCK)
-    //        {
-    //            int rnd_spawn = Random.Range(0, item_spawn.item_Spawn_Point.Count);
-    //            Vector3 spawnPosition = item_spawn.item_Spawn_Point[rnd_spawn] + transform.position;
-    //            Instantiate(items[ROCK], spawnPosition, Quaternion.identity, this.transform);
-    //        }
-    //        else
-    //        {
-    //            int rnd_spawn = Random.Range(0, item_spawn.item_Spawn_Point.Count);
-    //            Vector3 spawnPosition = item_spawn.item_Spawn_Point[rnd_spawn] + transform.position;
-    //            Instantiate(items[OXYGEN], spawnPosition, Quaternion.identity, this.transform);
-    //        }
-    //    }
-    // }
 }

@@ -208,7 +208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3612446122410640312, guid: 6abe63e686060db41a5bc48b542a3241, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4556348616686816219, guid: 6abe63e686060db41a5bc48b542a3241, type: 3}
       propertyPath: m_Center.z
