@@ -1,74 +1,68 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class ObjectPool<T> : MonoBehaviour where T : Component
+public class ObjectPool : MonoBehaviour
 {
-    [SerializeField] private List<T> Values;
-    private Queue<T> poolList = new Queue<T>();
+    [SerializeField] private List<GameObject> Values;
+    private Queue<GameObject> poolList = new Queue<GameObject>();
 
-    private const int _generateCount =5;
+    [SerializeField] private int _generateCount = 3;
     private const int _atLeastCount =5;
 
-    private void Start()
+    private void Awake()
     {
-        Init();
-
-        Shuffle();
+        Init(_generateCount);
     }
-    private void Init()
+
+    private void Init(int generateCount)
     {
+        List<GameObject> tempList = new List<GameObject>();
+
         for (int i = 0; i < Values.Count; i++)
         {
-            for (int j = 0; j < _generateCount; j++)
+            for (int j = 0; j < generateCount; j++)
             {
-                T obj = Instantiate(Values[i], this.transform);
-                obj.name = Values[i].name;
-                obj.gameObject.SetActive(false);
-                poolList.Enqueue(obj);
+                tempList.Add(Values[i]);
             }
         }
+
+        Shuffle(tempList);
+
+        for (int i = 0; i < tempList.Count; i++)
+        {
+            GameObject obj = Instantiate(tempList[i], this.transform);  
+            obj.name = tempList[i].name;  
+            obj.SetActive(false); 
+            poolList.Enqueue(obj);  
+        }
     }
-    private void Shuffle()
+
+    private void Shuffle(List<GameObject> list)
     {
-        List<T> temp = new List<T>(poolList);
-
-        for (int i = 0; i < temp.Count; i++)
+        for (int i = 0; i < list.Count; i++)
         {
-            int randomIndex = Random.Range(i, temp.Count);
-            T tempItem = temp[i];
-            temp[i] = temp[randomIndex];
-            temp[randomIndex] = tempItem;
-        }
-
-        poolList.Clear();
-        foreach (T obj in temp)
-        {
-            poolList.Enqueue(obj);
+            int randomIndex = Random.Range(i, list.Count);
+            GameObject temp = list[i];
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
         }
     }
-
     public void PushObject(GameObject newObject)
     {
-        T value = newObject.GetComponent<T>();
-
         newObject.SetActive(false);
-        poolList.Enqueue(value);
-
-        if (poolList.Count < _atLeastCount)
-            Init();
+        poolList.Enqueue(newObject);
     }
 
     public GameObject PullObject()
     {
-        if (poolList.Count == 0)  
+        if (poolList.Count <= _atLeastCount)  
         {
-            Init();
+            Init(_generateCount);
         }
 
-        T obj = poolList.Dequeue(); 
-        obj.gameObject.SetActive(true);
-        return obj.gameObject;
+        GameObject obj = poolList.Dequeue(); 
+        obj.SetActive(true);
+        return obj;
     }
 
 }

@@ -1,83 +1,74 @@
+癤퓎sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RoadManager : MonoBehaviour
 {
-    public GameObject[] floors;
-    public GameObject[] floors_corner;
-    public List<Floor> floor_list;
+    private List<Road> roadList = new List<Road>();
 
-    int straight_floor = 0;
-    int random_floor = 0;
+    [SerializeField] private GameObject startRoad;
+    [SerializeField] private ObjectPool roadObjectPool;
 
-    const int corner_min = 4;
-    const int corner_max = 9;
+    private const int maxRoadCount = 6;
 
     private void Start()
     {
-        Floor.OnFloorDestroyed += RemoveDestroyedFloor;
-
-        // 현픸E바닥에서 다음 바닥의 생성 위치를 가져온다. 
-        SetRandomFloor();
-        if (floor_list.Count == 0) return;
-        for(int i = 0; i < 9; i++)
-        {
-            CreateFloor();
-        }
+        StartCoroutine(GenerateRoad());
     }
 
-    private void CreateFloor()
+    private IEnumerator GenerateRoad()
     {
-        if(GameManager.instance.isLive)
+        while (roadList.Count <= maxRoadCount)
         {
-            if(straight_floor >= random_floor)
+            if (roadList.Count <= 0)
             {
-                CreateConrerFloor();
-                straight_floor = 0;
-                SetRandomFloor();
+                Road road = Instantiate(startRoad, this.transform).GetComponent<Road>();
+                road.OnEnterRoad += () => OnRoadDisappear(road);
+                roadList.Add(road);
+
+                yield return null;
             }
-            else
-            {
-                CreateNoramlFloor();
-                straight_floor++;
-            }
+
+            AddRoad();
+
+            yield return null;
         }
     }
-    void SetRandomFloor()
+
+    public void OnRoadDisappear(Road road)
     {
-        random_floor = Random.Range(corner_min, corner_max);
+        if (road == null)
+            return;
+
+        roadList.Remove(road);
+        roadObjectPool.PushObject(road.gameObject);
+        AddRoad();
     }
 
-    private void CreateNoramlFloor()
+    private void AddRoad()
     {
-        Transform tr = floor_list[floor_list.Count-1].GetComponent<Floor>().next_Floor_Spawn_Point;
-        int r = Random.Range(0, floors.Length);
-        GameObject go = Instantiate(floors[r], tr.position, tr.rotation, this.transform);
-        Floor go_floor = go.GetComponent<Floor>();
-        floor_list.Add(go_floor);
-    }
+        GameObject roadObj = roadObjectPool.PullObject();
+        Road road = roadObj.GetComponent<Road>();
 
-    private void CreateConrerFloor()
-    {
-        Transform tr = floor_list[floor_list.Count - 1].GetComponent<Floor>().next_Floor_Spawn_Point;
-        int r = Random.Range(0, floors_corner.Length);
-        GameObject go = Instantiate(floors_corner[r], tr.position, tr.rotation, this.transform);
-        Floor go_floor = go.GetComponent<Floor>();
-        floor_list.Add(go_floor);
-    }
-
-    private void RemoveDestroyedFloor(Floor destroyedFloor)
-    {
-        if (floor_list.Contains(destroyedFloor))
+        if (road.roadType == FloorType.CORNER && IsDoubleCornerRoad())
+            roadObjectPool.PushObject(roadObj);
+        else
         {
-            CreateFloor();
-            floor_list.Remove(destroyedFloor);
+            Transform spawnTR = roadList[roadList.Count - 1].nextFloorSpawnPoint;
+            roadObj.transform.SetPositionAndRotation(spawnTR.position, spawnTR.rotation);
+            road.OnEnterRoad += () => OnRoadDisappear(road);
+            roadList.Add(road);
         }
     }
 
-    private void OnDestroy()
+    bool IsDoubleCornerRoad()
     {
-        // 이벤트 구독 해제
-        Floor.OnFloorDestroyed -= RemoveDestroyedFloor;
+        if (roadList.Count < 1)
+            return false;
+
+        int lastIndex = roadList.Count - 1;
+        bool isLastCorner = roadList[lastIndex].roadType == FloorType.CORNER;
+
+        return isLastCorner;
     }
 }

@@ -1,20 +1,9 @@
 using UnityEngine;
 
-public class ChangeTurn : InteractableObject
+public class ChangeTurn : MonoBehaviour, IInteractable
 {
-    private PlayerRun _player;
-
-    private void Start()
+    public void Interact(GameObject player)
     {
-        _player = FindObjectOfType<PlayerRun>();
-    }
-    protected override void RegisterEvents()
-    {
-        OnInteract += _player.SetTurn;
-    }
-
-    protected override void UnregisterEvents()
-    {
-        OnInteract -= _player.SetTurn;
+        player.GetComponent<PlayerRun>().SetTurn();
     }
 }

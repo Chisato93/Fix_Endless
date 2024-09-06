@@ -1,7 +1,7 @@
 public enum FloorType
 {
     NONE,
-    FLOOR,
+    NORMAL,
     HEIGHT,
     CORNER,
     START_FLOOR,
