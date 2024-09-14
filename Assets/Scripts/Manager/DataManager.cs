@@ -1,7 +1,5 @@
-using System.IO;
-using UnityEditor.TerrainTools;
+ï»¿using System.IO;
 using UnityEngine;
-using static GameManager;
 
 struct Data
 {
@@ -10,79 +8,50 @@ struct Data
     public int gold;
 }
 
-public class DataManager : MonoBehaviour
+public class DataManager
 {
-    public static DataManager instance;
-    
-    private void Awake()
-    {
-        if(instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-            Destroy(gameObject);
-
-    }
-
-    private void Start()
-    {
-        LoadData();
-
-        GameManager.instance.ShowScene();
-    }
+    private const string fileName = "SaveData.json";
 
     public void SaveData()
     {
-        Data playerData = new Data
+        Data resourceData = new Data
         {
-            firstGame = GameManager.instance.FirstGame,
-            best_dist = GameManager.instance.best_goal,
-            gold = GameManager.instance.Gold,
+            firstGame = GameManager.Instance.isFirstGame,
+            best_dist = GameManager.Instance.bestDistance.BestDistance,
+            gold = GameManager.Instance.gold.Gold,
         };
 
-        // PlayerData °´Ã¼¸¦ JSON ¹®ÀÚ¿­·Î º¯È¯
-        string jsonString = JsonUtility.ToJson(playerData, true);
+        string jsonString = JsonUtility.ToJson(resourceData, true);
 
-        // ÆÄÀÏ °æ·Î ¼³Á¤
-        string path = Path.Combine(Application.persistentDataPath, "playerData.json");
+        string path = Path.Combine(Application.persistentDataPath, fileName);
 
         byte[] bytes = System.Text.Encoding.UTF8.GetBytes(jsonString);
         string secrete_data = System.Convert.ToBase64String(bytes);
 
-        // JSON ¹®ÀÚ¿­À» ÆÄÀÏ¿¡ ÀúÀE
         File.WriteAllText(path, secrete_data);
-
-        Debug.Log("Data saved to: " + path);
     }
 
     public void LoadData()
     {
+        string path = Path.Combine(Application.persistentDataPath, fileName);
 
-        // ÆÄÀÏ °æ·Î ¼³Á¤
-        string path = Path.Combine(Application.persistentDataPath, "playerData.json");
-
-        // ÆÄÀÏÀÌ Á¸ÀçÇÏ´ÂÁEÈ®ÀÎ
         if (File.Exists(path))
         {
-            // ÆÄÀÏ¿¡¼­ JSON ¹®ÀÚ¿­ ÀĞ±E
             string jsonString = File.ReadAllText(path);
 
             byte[] bytes = System.Convert.FromBase64String(jsonString);
             string data = System.Text.Encoding.UTF8.GetString(bytes);
 
-            // JSON ¹®ÀÚ¿­À» PlayerData °´Ã¼·Î º¯È¯
-            Data playerData = JsonUtility.FromJson<Data>(data);
+            Data resourceData = JsonUtility.FromJson<Data>(data);
 
-            if (GameManager.instance != null)
+            if (GameManager.Instance != null)
             {
-                GameManager.instance.FirstGame = playerData.firstGame;
-                GameManager.instance.best_goal = playerData.best_dist;
-                GameManager.instance.Gold = playerData.gold;
-
+                GameManager.Instance.isFirstGame = resourceData.firstGame;
+                GameManager.Instance.bestDistance.BestDistance = resourceData.best_dist;
+                GameManager.Instance.gold.Gold = resourceData.gold;
             }
-
         }
+        else
+            Debug.Log("ë¡œë“œí•  ë°ì´í„°ê°€ ì—†ìŠµë‹ˆë‹¤.");
     }
 }

@@ -3,10 +3,19 @@ using UnityEngine;
 
 public class PlayerRunning : MonoBehaviour
 {
+<<<<<<< Updated upstream:Assets/Scripts/Player/PlayerRunning.cs
     float MoveSpeed = 8f;
     float increase_Speed = 1f;
     public bool canTurn = false;
 
+=======
+    [SerializeField] private float currentMoveSpeed = 8f;             // 현재 이동속도
+    [SerializeField] private float increase_Speed = 1f;               // 시간이 경과되면서 추가되는 속도
+    [SerializeField] private float speedUp_delay = 10f;               // 올라가는 속도의 딜레이 시간
+    private const float start_delay_Time = 0f;       // 딜레이 시작 시간
+    private bool canTurn = false;                                     // 회전 가능여부
+    private bool isLive = false;                                      // 생존 여부
+>>>>>>> Stashed changes:Assets/Scripts/Player/PlayerRun.cs
     private Rigidbody rb;
 
     private float speedUp_delay = 10f;

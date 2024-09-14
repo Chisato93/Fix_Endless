@@ -1,43 +1,35 @@
-using Cinemachine;
+﻿using Cinemachine;
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public static GameManager instance;
+    public bool isFirstGame = true; // => 일단 임시 추후 씨네마할때 변경S
 
-    private void Awake()
+    public ItemManager equipmnet;
+    public GoldClass gold;
+    public BestDistanceClass bestDistance;
+    public DataManager dataManager;
+
+    protected override void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-            Destroy(gameObject);
+        base.Awake();
 
+        equipmnet = new ItemManager();
+        gold = new GoldClass();
+        bestDistance = new BestDistanceClass();
+        dataManager = new DataManager();
     }
 
-    [HideInInspector] private bool isFirstGame = true;
-    public bool isLive;
-    int goal = 3;
-    int per_sec;
-    int time_count;
-
-    public bool FirstGame
+    private void Start()
     {
-        get
-        {
-            return isFirstGame;
-        }
-        set
-        {
-            isFirstGame = value;
-        }
+        dataManager.LoadData();
     }
 
+<<<<<<< Updated upstream
     public int best_goal { get; set; } = 9999;
     public int Gold { get; set; } = 0;
 
@@ -164,5 +156,7 @@ public class GameManager : MonoBehaviour
 
         FindObjectOfType<Ending_TimeLine>().OpenTimeLine();
     }
+=======
+>>>>>>> Stashed changes
 
 }

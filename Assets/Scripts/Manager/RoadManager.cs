@@ -32,6 +32,7 @@ public class RoadManager : MonoBehaviour
         {
             if(straight_floor >= random_floor)
             {
+<<<<<<< Updated upstream
                 CreateConrerFloor();
                 straight_floor = 0;
                 SetRandomFloor();
@@ -41,6 +42,15 @@ public class RoadManager : MonoBehaviour
                 CreateNoramlFloor();
                 straight_floor++;
             }
+=======
+                Road road = Instantiate(startRoad, this.transform).GetComponent<Road>();
+                road.OnEnterRoad += () => OnRoadDisappear(road);
+                roadList.Add(road);
+                yield return null;
+            }
+            AddRoad();
+            yield return null;
+>>>>>>> Stashed changes
         }
     }
     void SetRandomFloor()

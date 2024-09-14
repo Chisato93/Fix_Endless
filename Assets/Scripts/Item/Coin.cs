@@ -14,9 +14,23 @@ public class Coin : InteractableObject
 
         OnInteract += () => _audioManager.PlayEffectSound(ItemType.COIN);
         OnInteract += _gameUI.SetGoldText;
+<<<<<<< Updated upstream
         OnInteract += () => GameManager.instance.GetGold(GetRandomCoin());
     }
 
+=======
+        OnInteract += () => SoundController.Instance.PlaySEAudio(SEType.Coin);
+        OnInteract += () => GameManager.Instance.gold.AddGold(GetRandomCoin());
+    }
+
+    protected override void UnregisterEvents()
+    {
+        OnInteract -= _gameUI.SetGoldText;
+        OnInteract -= () => SoundController.Instance.PlaySEAudio(SEType.Coin);
+        OnInteract -= () => GameManager.Instance.gold.AddGold(GetRandomCoin());
+    }
+
+>>>>>>> Stashed changes
     int GetRandomCoin()
     {
         // 거리/100 +1, 거리 /100 * 2 +1;
