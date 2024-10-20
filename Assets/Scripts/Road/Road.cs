@@ -11,7 +11,7 @@ public class Road : MonoBehaviour, IInteractable
 
     public event Action OnEnterRoad;
 
-    private const float _destroyTime = 5f;
+    private const float _destroyTime = 4f;
 
     private void Start()
     {
@@ -30,7 +30,7 @@ public class Road : MonoBehaviour, IInteractable
     }
     private void FloorDestroy()
     {
-        Destroy(gameObject);
+        this.gameObject.SetActive(false);
     }
 
 }

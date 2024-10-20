@@ -15,14 +15,14 @@ public class Coin : DisappearObject
     {
         OnInteract += _gameUI.SetGoldText;
         OnInteract += () => SoundController.Instance.PlaySEAudio(SEType.Coin);
-        OnInteract += () => GameManager.instance.GetGold(GetRandomCoin());
+        OnInteract += () => GameManager.Instance.GetGold(GetRandomCoin());
     }
 
     protected override void UnregisterEvents()
     {
         OnInteract -= _gameUI.SetGoldText;
         OnInteract -= () => SoundController.Instance.PlaySEAudio(SEType.Coin);
-        OnInteract -= () => GameManager.instance.GetGold(GetRandomCoin());
+        OnInteract -= () => GameManager.Instance.GetGold(GetRandomCoin());
     }
 
     int GetRandomCoin()

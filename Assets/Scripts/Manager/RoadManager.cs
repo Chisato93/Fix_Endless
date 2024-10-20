@@ -9,7 +9,7 @@ public class RoadManager : MonoBehaviour
     [SerializeField] private GameObject startRoad;
     [SerializeField] private ObjectPool roadObjectPool;
 
-    private const int maxRoadCount = 6;
+    private const int maxRoadCount = 9;
 
     private void Start()
     {

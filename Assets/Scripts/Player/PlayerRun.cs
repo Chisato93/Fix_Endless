@@ -7,7 +7,6 @@ public class PlayerRun : MonoBehaviour
     [SerializeField] private float speedUp_delay = 10f;               // 올라가는 속도의 딜레이 시간
     [SerializeField] private const float start_delay_Time = 0f;       // 딜레이 시작 시간
     private bool canTurn = false;                                     // 회전 가능여부
-    private bool isLive = false;                                      // 생존 여부
     private Rigidbody rb;
 
     void Start()
@@ -19,16 +18,13 @@ public class PlayerRun : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isLive)
+        if (canTurn)
         {
-            if (canTurn)
-            {
-                Turn();
-            }
-            else
-            {
-                Move();
-            }
+            Turn();
+        }
+        else
+        {
+            Move();
         }
     }
 
