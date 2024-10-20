@@ -13,7 +13,7 @@ public class DataManager : Singleton<DataManager>
     private void Start()
     {
         LoadData();
-        GameManager.Instance.ShowScene();
+        // GameManager.Instance.ShowScene();
     }
 
     public void SaveData()

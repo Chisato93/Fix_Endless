@@ -8,7 +8,7 @@ public class Singleton <T> : MonoBehaviour where T : MonoBehaviour
     {
         get
         {
-            if (Instance == null)
+            if (instance == null)
             {
                 GameObject obj;
                 obj = FindObjectOfType<T>().gameObject;
@@ -22,7 +22,7 @@ public class Singleton <T> : MonoBehaviour where T : MonoBehaviour
                     instance = obj.GetComponent<T>();
                 }
             }
-            return Instance;
+            return instance;
         }
     }
 
