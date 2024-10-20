@@ -1,43 +1,12 @@
-using Cinemachine;
-using System;
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.SceneManagement;
-
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public static GameManager instance;
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-            Destroy(gameObject);
-
-    }
-
-    [HideInInspector] private bool isFirstGame = true;
+    public bool IsFirstGame { get; set; } = true;
     public bool isLive;
     int goal = 3;
     int per_sec;
     int time_count;
-
-    public bool FirstGame
-    {
-        get
-        {
-            return isFirstGame;
-        }
-        set
-        {
-            isFirstGame = value;
-        }
-    }
-
     public int best_goal { get; set; } = 9999;
     public int Gold { get; set; } = 0;
 
@@ -63,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     public void ShowScene()
     {
-        if (!isFirstGame) 
+        if (!IsFirstGame) 
             EndCinma();
         else 
             StartCinema();
@@ -147,7 +116,7 @@ public class GameManager : MonoBehaviour
     }
     void GameOver()
     {
-        DataManager.instance.SaveData();
+        DataManager.Instance.SaveData();
 
         Destroy(player);
 
@@ -160,7 +129,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER);
         player.SetActive(false);
 
-        DataManager.instance.SaveData();
+        DataManager.Instance.SaveData();
 
         FindObjectOfType<Ending_TimeLine>().OpenTimeLine();
     }

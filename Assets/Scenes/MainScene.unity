@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.079824954, g: 0.056520976, b: 0.029212922, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4516,7 +4516,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1032623436
 Transform:
   m_ObjectHideFlags: 0
@@ -7634,8 +7634,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1732532350}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.9990483, z: 0.043619405, w: 0}
-  m_LocalPosition: {x: -57.350002, y: 1.763, z: -27.537024}
+  m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
+  m_LocalPosition: {x: -1.05, y: 3.687, z: -2.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8149,9 +8149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a917b28636a37614bb58753f02ac4074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  effect: {fileID: 0}
-  dead_sound: {fileID: 0}
 --- !u!1 &1828975641
 GameObject:
   m_ObjectHideFlags: 3

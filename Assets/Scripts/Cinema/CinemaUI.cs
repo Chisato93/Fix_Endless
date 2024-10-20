@@ -16,6 +16,6 @@ public class CinemaUI : MonoBehaviour
     
     void EndCinema()
     {
-        GameManager.instance.EndCinma();
+        GameManager.Instance.EndCinma();
     }
 }

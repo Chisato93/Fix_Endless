@@ -15,14 +15,14 @@ public class OxygenTank : DisappearObject
     {
         OnInteract += _gameUI.SetOxygen;
         OnInteract += () => SoundController.Instance.PlaySEAudio(SEType.Oxygen);
-        OnInteract += () => GameManager.instance.GetOxgyn(oxygen_amount);
+        OnInteract += () => GameManager.Instance.GetOxgyn(oxygen_amount);
     }
 
     protected override void UnregisterEvents()
     {
         OnInteract -= _gameUI.SetOxygen;
         OnInteract -= () => SoundController.Instance.PlaySEAudio(SEType.Oxygen);
-        OnInteract -= () => GameManager.instance.GetOxgyn(oxygen_amount);
+        OnInteract -= () => GameManager.Instance.GetOxgyn(oxygen_amount);
     }
 
 }
