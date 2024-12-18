@@ -1,8 +1,8 @@
 /*
  
-1. »óÁ¡ ¹Ì±¸ÇE
-3. °ÔÀÓ ½ÃÀÛÇßÀ» °æ¿EÃ³À½¿¡ 0¿EÇ¥½Ã
-4. Å¸ÀÓ¶óÀÎ Àç»ýÀÌ ¾ÈµÊ
-
+1. æƒ‘ç—¢ å›ºå¤‡èŽµE
+3. éœ¸çƒ™ çŸ«ç´¯æ²é˜‘ ç‰ˆç¸¼Eè´¸æ¾œä¿Š 0ç¸¼Eé’ŽçŸ«
+4. é¸¥çƒ™æ‰¼ç‰¢ çŠç§¯æž æ•‘å‡³
+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
 
  */
